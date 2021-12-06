@@ -64,7 +64,10 @@ function HomePage(props) {
     }
 
     function onSelectCity(id) {
-        onSetCityIDs([...cityIDs, id])
+        if (!cityIDs.includes(id)) {
+            onSetCityIDs([...cityIDs, id])
+        }
+
         setIsSearching(!isSearching)
         setQuery("")
     }
