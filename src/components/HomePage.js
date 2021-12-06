@@ -28,7 +28,7 @@ function HomePage(props) {
         // to get id based on names fetching from local storage
         fetchLocalCityList()
             .then(res => {
-                onSetCityIDs(JSON.parse(localStorage.getItem(LOCAL_STORAGE_CITIES_KEY)));
+                onSetCityIDs(JSON.parse(localStorage.getItem(LOCAL_STORAGE_CITIES_KEY)) || []);
             })
     }, []);
 
@@ -46,7 +46,7 @@ function HomePage(props) {
     async function fetchData() {
         if (cityIDs.length > 0) {
             const apiKey = "0bfe6e7875c045ab0b6cdd6bd5eea322"
-            const url = `http://api.openweathermap.org/data/2.5/group?id=${cityIDs.join(",")}&appid=${apiKey}`
+            const url = `https://api.openweathermap.org/data/2.5/group?id=${cityIDs.join(",")}&appid=${apiKey}`
             const res = await axios.get(url);
             setCityData(res.data.list)
         }
